@@ -70,9 +70,13 @@
 				projection: projection
 			})
 		});
+		
 		TR3.setLoader( 'TR3-min/' );
 		document.getElementById('tools').innerHTML = TR3.setPanel();
+		TR3.setOptions(false/*imgControl*/, false/*cursor*/, false/*anaglyph*/, false/*autoRotate*/, false/*wireframeMesh*/);
+		
 		$( "#tools" ).dialog({position: { my: "right top", at: "right top", of: window },width: 215});
+		
 
 function setTR3() {
 
@@ -90,7 +94,7 @@ function setTR3() {
 	var img = new Image;
 	img.src = ori.toDataURL();*/
 	
-	TR3.setOptions(false, false, false, false, false);
+	
 	TR3.setStart(ori, desty, bbox, code, bbox);
 }
 
