@@ -41,7 +41,6 @@
 	
 	<!--proj4-->
 	<script type="text/javascript" src="proj4js/proj4.js"></script>
-	<script type="text/javascript" src="proj4js/25830.js"></script>
 	
     <title>Display example</title>
   </head>
@@ -51,9 +50,6 @@
 	<div id="tools" class="tools" ></div>
 	<div id="progress" class="progress" title="Herramientas" ></div>
     <script type="text/javascript">
-		ol.proj.proj4.register(proj4);//ol v5.0.0
-		var projection = ol.proj.get("EPSG:25830");
-		projection.setExtent([ -1500000, 3000000, 2000000, 5000000]);
 		
 		var osmLayer =  new ol.layer.Tile({
 			source: new ol.source.OSM(/*{crossOrigin: 'anonymous'}*/)
@@ -64,23 +60,20 @@
 				osmLayer
 			],
 			view: new ol.View({
-				center: [440000, 4440000],
-				//maxZomm: 12,
-				zoom: 3.4,
-				projection: projection
+				center: [-411990, 4933238],
+				zoom: 6.5
 			})
 		});
 		
 		TR3.setLoader( 'TR3-min/' );
 		document.getElementById('tools').innerHTML = TR3.setPanel();
-		TR3.setOptions();
+		
 		var opts = {	imgControl: false, 
 						cursor: true, 
 						anaglyph: true, 
 						autoRotate: true, 
 						wireframeMesh: true
 		}
-		
 		TR3.setOpts( opts );
 		
 		$( "#tools" ).dialog({position: { my: "right top", at: "right top", of: window },width: 215});
@@ -101,7 +94,9 @@
 						projCode: code,
 						lookAtini: [50,2]};
 			
-		TR3.setStart( TR3pms );
+		TR3.setStart( TR3pms ).then(function(obj) { 
+			//obj.material.wireframe = true;
+		});
 	}
 
 setTimeout(function () {
